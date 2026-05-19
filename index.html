@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hippo-Pot-Um-Us · Sportcafé & Poolcentrum Hilversum</title>
+<meta name="description" content="Hippo-Pot-Um-Us Sportcafé & Poolcentrum in Hilversum. Pool, Snooker, Biljart, Darts & Live sport. Havenstraat 43, Hilversum. Open 7 dagen per week.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* === RESET === */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* === VARIABLES === */
+:root{
+  --bg:#1C0E04;
+  --bg-card:#231106;
+  --bg-card2:#2B1509;
+  --amber:#C4832A;
+  --amber-l:#E8B96A;
+  --cream:#F5EDD8;
+  --cream-m:#C8B89A;
+  --muted:#8A7055;
+  --border:rgba(196,131,42,.22);
+  --fh:'Playfair Display',Georgia,serif;
+  --fb:'Source Sans 3',-apple-system,sans-serif;
+}
+
+/* === BASE === */
+body{font-family:var(--fb);background:var(--bg);color:var(--cream);line-height:1.65;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--fh);line-height:1.2}
+h1{font-size:clamp(2.4rem,6vw,5rem)}
+h2{font-size:clamp(1.7rem,4vw,2.6rem)}
+h3{font-size:clamp(1.15rem,2.5vw,1.5rem)}
+a{color:inherit;text-decoration:none}
+::placeholder{color:var(--muted)}
+
+/* === SPA PAGES === */
+.page{display:none}
+.page.active{display:block}
+
+/* === NAVBAR === */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:70px;padding:0 2rem;
+  background:rgba(28,14,4,.96);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between
+}
+.nav-logo{cursor:pointer;display:flex;flex-direction:column;line-height:1;gap:1px}
+.logo-big{font-family:var(--fh);font-size:1.55rem;font-weight:800;color:var(--amber-l);letter-spacing:-.02em}
+.logo-small{font-family:var(--fh);font-style:italic;font-size:.6rem;color:var(--cream-m);letter-spacing:.18em;text-transform:uppercase}
+.nav-links{display:flex;gap:1.75rem;list-style:none;align-items:center}
+.nav-links a{
+  font-size:.82rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--cream-m);padding-bottom:3px;border-bottom:2px solid transparent;
+  cursor:pointer;transition:color .2s,border-color .2s
+}
+.nav-links a:hover,.nav-links a.active{color:var(--amber-l);border-bottom-color:var(--amber)}
+
+/* hamburger */
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{display:block;width:24px;height:2px;background:var(--cream);border-radius:2px;transition:all .3s}
+.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hbg.open span:nth-child(2){opacity:0}
+.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.mob-menu{
+  display:none;position:fixed;top:70px;left:0;right:0;z-index:999;
+  background:rgba(28,14,4,.98);border-bottom:1px solid var(--border);
+  padding:1.5rem 2rem;flex-direction:column;gap:.75rem
+}
+.mob-menu.open{display:flex}
+.mob-menu a{
+  font-size:1rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--cream);padding:.6rem 0;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:color .2s
+}
+.mob-menu a:hover,.mob-menu a.active{color:var(--amber-l)}
+
+/* === BUTTONS === */
+.btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.72rem 1.7rem;border-radius:4px;
+  font-family:var(--fb);font-size:.85rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  cursor:pointer;border:2px solid transparent;transition:all .22s
+}
+.btn-amber{background:var(--amber);color:#1C0E04;border-color:var(--amber)}
+.btn-amber:hover{background:var(--amber-l);border-color:var(--amber-l);transform:translateY(-2px);box-shadow:0 8px 24px rgba(196,131,42,.35)}
+.btn-outline{background:transparent;color:var(--cream);border-color:rgba(245,237,216,.5)}
+.btn-outline:hover{border-color:var(--amber-l);color:var(--amber-l);transform:translateY(-2px)}
+.btn-dark{background:#1C0E04;color:var(--amber-l);border-color:#1C0E04}
+.btn-dark:hover{background:#0e0702;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.btn-full{width:100%;justify-content:center}
+
+/* === LAYOUT HELPERS === */
+.wrap{max-width:1160px;margin:0 auto;padding:0 2rem}
+.section{padding:6rem 2rem;max-width:1160px;margin:0 auto}
+.sec-head{text-align:center;margin-bottom:3.5rem}
+.eyebrow{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:.85rem}
+.gold-line{width:52px;height:2px;background:linear-gradient(90deg,var(--amber),var(--amber-l));margin:.9rem auto;border-radius:2px}
+.sec-head p{color:var(--cream-m);max-width:580px;margin:0 auto;font-size:1rem}
+
+/* ═══════════════════════════════════════
+   HOME
+═══════════════════════════════════════ */
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:8rem 2rem 5rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%,rgba(196,131,42,.13) 0%,transparent 65%),
+    radial-gradient(ellipse 50% 40% at 15% 85%,rgba(196,131,42,.07) 0%,transparent 55%),
+    var(--bg);
+  position:relative;overflow:hidden
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(196,131,42,.04) 60px),
+    repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(196,131,42,.04) 60px);
+  pointer-events:none
+}
+.hero-inner{position:relative;z-index:1;max-width:820px}
+.hero-badge{
+  display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--amber);
+  padding:.38rem 1rem;border:1px solid rgba(196,131,42,.45);border-radius:3px;
+  margin-bottom:1.75rem
+}
+.hero h1{margin-bottom:.7rem;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.hero-sub{
+  font-family:var(--fh);font-style:italic;
+  font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--amber-l);margin-bottom:1.4rem
+}
+.hero-desc{color:var(--cream-m);font-size:1.05rem;max-width:540px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:4rem}
+.divider-gold{
+  width:100%;max-width:540px;height:1px;margin:0 auto 3.25rem;
+  background:linear-gradient(90deg,transparent,var(--amber),transparent)
+}
+.hero-stats{display:flex;gap:3.5rem;justify-content:center;flex-wrap:wrap}
+.stat-num{font-family:var(--fh);font-size:2.6rem;font-weight:700;color:var(--amber-l);line-height:1;margin-bottom:.2rem}
+.stat-lbl{font-size:.75rem;color:var(--cream-m);text-transform:uppercase;letter-spacing:.12em}
+
+/* REVIEWS STRIP */
+.rev-strip{background:linear-gradient(135deg,var(--amber) 0%,#a96e1f 100%);padding:3rem 2rem}
+.rev-inner{max-width:1160px;margin:0 auto;display:flex;gap:2.5rem;align-items:flex-start;flex-wrap:wrap}
+.rev-score{flex-shrink:0;text-align:center;min-width:120px}
+.rev-big{font-family:var(--fh);font-size:3.8rem;font-weight:800;color:#1C0E04;line-height:1}
+.rev-stars{font-size:1.3rem;color:#1C0E04;margin:.2rem 0}
+.rev-count{font-size:.82rem;color:rgba(28,14,4,.7);font-weight:600}
+.rev-cards{display:flex;gap:1rem;flex:1;flex-wrap:wrap}
+.rev-card{background:rgba(28,14,4,.14);border-radius:8px;padding:1.2rem;flex:1;min-width:210px}
+.rev-card .s{color:#1C0E04;font-size:.85rem;margin-bottom:.45rem}
+.rev-card blockquote{font-size:.88rem;color:#1C0E04;line-height:1.5;margin-bottom:.7rem;font-style:italic}
+.rev-card cite{font-size:.78rem;color:rgba(28,14,4,.65);font-style:normal;font-weight:700}
+
+/* CONTENT STRIPS */
+.c-strip{padding:5rem 0;border-top:1px solid var(--border)}
+.c-strip:first-of-type{border-top:none}
+.c-inner{
+  max-width:1100px;margin:0 auto;padding:0 2rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center
+}
+.c-inner.rev{direction:rtl}
+.c-inner.rev>*{direction:ltr}
+.c-visual{
+  background:linear-gradient(140deg,#2B1509 0%,#1C0E04 100%);
+  border:1px solid var(--border);border-radius:14px;
+  aspect-ratio:4/3;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:.9rem
+}
+.c-visual .vi{font-size:4.5rem}
+.c-visual .vl{font-family:var(--fh);font-style:italic;color:var(--amber);font-size:.95rem}
+.c-text .eyebrow{margin-bottom:.65rem}
+.c-text h2{margin-bottom:1.2rem;font-size:clamp(1.5rem,3vw,2.1rem)}
+.c-text p{color:var(--cream-m);margin-bottom:1.4rem;line-height:1.75;font-size:.98rem}
+
+/* ═══════════════════════════════════════
+   ACTIVITEITEN
+═══════════════════════════════════════ */
+.act-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.act-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
+  padding:2rem;transition:all .24s;cursor:default
+}
+.act-card:hover{border-color:var(--amber);transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.45)}
+.act-card .ci{font-size:2.4rem;margin-bottom:1rem}
+.act-card h3{margin-bottom:.7rem}
+.act-card p{color:var(--cream-m);font-size:.93rem;line-height:1.68;margin-bottom:1.2rem}
+.tag{
+  display:inline-block;padding:.22rem .7rem;
+  background:rgba(196,131,42,.12);border:1px solid rgba(196,131,42,.38);
+  color:var(--amber-l);border-radius:20px;font-size:.72rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase
+}
+.cta-strip{
+  background:linear-gradient(135deg,var(--amber) 0%,#a96e1f 100%);
+  border-radius:12px;padding:2.8rem 2.5rem;text-align:center;margin-top:2.8rem
+}
+.cta-strip .cq{font-family:var(--fh);font-style:italic;font-size:1.35rem;color:#1C0E04;margin-bottom:1.4rem}
+
+/* ═══════════════════════════════════════
+   RESERVEREN
+═══════════════════════════════════════ */
+.res-grid{display:grid;grid-template-columns:1fr 1.45fr;gap:4rem;align-items:start}
+.res-info h2{font-size:1.7rem;margin-bottom:1.75rem}
+.hours-tbl{width:100%;border-collapse:collapse;margin-bottom:2rem}
+.hours-tbl tr{border-bottom:1px solid var(--border)}
+.hours-tbl tr:last-child{border-bottom:none}
+.hours-tbl td{padding:.7rem 0;font-size:.93rem}
+.hours-tbl td:first-child{color:var(--cream-m);width:58%}
+.hours-tbl td:last-child{color:var(--amber-l);font-weight:700}
+.info-blk{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:8px;padding:1.4rem;margin-bottom:1.4rem
+}
+.info-blk h3{
+  font-family:var(--fb);font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--amber-l);margin-bottom:.7rem
+}
+.info-blk p{color:var(--cream-m);font-size:.9rem;line-height:1.6;margin-bottom:.35rem}
+.info-blk a{color:var(--amber-l);font-weight:600;transition:color .2s}
+.info-blk a:hover{color:var(--cream)}
+
+/* form card */
+.form-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2.4rem}
+.form-card h2{font-size:1.7rem;margin-bottom:1.75rem}
+.fg{margin-bottom:1.2rem}
+.fg label{display:block;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--cream-m);margin-bottom:.4rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fc{
+  width:100%;background:rgba(245,237,216,.05);border:1px solid var(--border);
+  border-radius:6px;padding:.72rem 1rem;color:var(--cream);
+  font-family:var(--fb);font-size:.93rem;outline:none;transition:border-color .2s,background .2s
+}
+.fc:focus{border-color:var(--amber);background:rgba(196,131,42,.07)}
+.fc option{background:#231106}
+textarea.fc{resize:vertical;min-height:96px}
+.fnote{font-size:.78rem;color:var(--muted);text-align:center;margin-top:.7rem}
+.f-success{display:none;text-align:center;padding:2rem 1rem}
+.f-success .sico{font-size:2.8rem;margin-bottom:.9rem}
+.f-success h3{color:var(--amber-l);margin-bottom:.7rem;font-size:1.3rem}
+.f-success p{color:var(--cream-m);font-size:.93rem;margin-bottom:1.5rem;line-height:1.65}
+
+/* ═══════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════ */
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.con-info h2,.con-right h2{font-size:1.7rem;margin-bottom:1.75rem}
+.con-item{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.4rem;padding-bottom:1.4rem;border-bottom:1px solid var(--border)}
+.con-item:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.con-ico{
+  width:40px;height:40px;border-radius:8px;flex-shrink:0;
+  background:rgba(196,131,42,.1);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem
+}
+.con-lbl{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--amber);font-weight:700;margin-bottom:.15rem}
+.con-val,.con-val a{color:var(--cream);font-size:.98rem;transition:color .2s}
+.con-val a:hover{color:var(--amber-l)}
+.maps-btn{margin-top:1.75rem}
+.amb-cta{
+  background:linear-gradient(135deg,rgba(196,131,42,.14) 0%,rgba(196,131,42,.05) 100%);
+  border:1px solid var(--amber);border-radius:10px;
+  padding:2rem;text-align:center;margin-top:1.75rem
+}
+.amb-cta .cq{font-family:var(--fh);font-style:italic;font-size:1.1rem;color:var(--amber-l);margin-bottom:1.2rem}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{background:#0e0702;border-top:1px solid var(--border);padding:2rem;text-align:center}
+footer p{color:var(--muted);font-size:.82rem;line-height:1.9}
+footer a{color:var(--amber);transition:color .2s}
+footer a:hover{color:var(--amber-l)}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:900px){
+  .res-grid{grid-template-columns:1fr}
+  .con-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hbg{display:flex}
+  .c-inner{grid-template-columns:1fr;gap:2rem}
+  .c-inner.rev{direction:ltr}
+  .rev-inner{flex-direction:column}
+  .rev-cards{flex-direction:column}
+  .hero-stats{gap:1.75rem}
+  .frow{grid-template-columns:1fr}
+  .section{padding:4rem 1.25rem}
+}
+@media(max-width:480px){
+  nav{padding:0 1.25rem}
+  .hero-btns{flex-direction:column;align-items:center}
+  .act-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ██████ NAVBAR ██████ -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <span class="logo-big">Hippo</span>
+    <span class="logo-small">Hilversum</span>
+  </div>
+  <ul class="nav-links">
+    <li><a id="nl-home" class="active" onclick="showPage('home')">Home</a></li>
+    <li><a id="nl-act" onclick="showPage('act')">Activiteiten</a></li>
+    <li><a id="nl-res" onclick="showPage('res')">Reserveren</a></li>
+    <li><a id="nl-con" onclick="showPage('con')">Contact</a></li>
+  </ul>
+  <button class="hbg" id="hbg" aria-label="Menu openen" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <a id="ml-home" class="active" onclick="showPage('home');closeMenu()">Home</a>
+  <a id="ml-act" onclick="showPage('act');closeMenu()">Activiteiten</a>
+  <a id="ml-res" onclick="showPage('res');closeMenu()">Reserveren</a>
+  <a id="ml-con" onclick="showPage('con');closeMenu()">Contact</a>
+</div>
+
+<!-- ██████ PAGE: HOME ██████ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">Havenstraat 43 &middot; Hilversum &middot; Est. 1990</div>
+      <h1>Hippo-Pot-<em style="font-style:italic;color:var(--amber-l)">Um-Us</em></h1>
+      <p class="hero-sub">Snooker, Pool &amp; Sportcaf&eacute;</p>
+      <p class="hero-desc">De gezelligste pool- en snookerzaal van Hilversum. Voor beginners en gevorderden, jong en oud. Huur een tafel, gooi een pijl en kijk sport op groot scherm &mdash; met een koud biertje aan de bar.</p>
+      <div class="hero-btns">
+        <button class="btn btn-amber" onclick="showPage('res')">Reserveer een tafel</button>
+        <button class="btn btn-outline" onclick="showPage('act')">Bekijk activiteiten</button>
+      </div>
+      <div class="divider-gold"></div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">12+</div>
+          <div class="stat-lbl">Snooker &amp; Pooltafels</div>
+        </div>
+        <div>
+          <div class="stat-num">7</div>
+          <div class="stat-lbl">Dagen per week open</div>
+        </div>
+        <div>
+          <div class="stat-num">30+</div>
+          <div class="stat-lbl">Jaar ervaring</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <div class="rev-strip">
+    <div class="rev-inner">
+      <div class="rev-score">
+        <div class="rev-big">4,5 &#9733;</div>
+        <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        <div class="rev-count">371 Google reviews</div>
+      </div>
+      <div class="rev-cards">
+        <div class="rev-card">
+          <div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;Altijd feest en gezelligheid, overdag of &rsquo;s avonds &mdash; service altijd top!&rdquo;</blockquote>
+          <cite>&mdash; Dennis K.</cite>
+        </div>
+        <div class="rev-card">
+          <div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;Vriendelijk personeel, ruim assortiment bieren, lekkere hapjes en nette pooltafels.&rdquo;</blockquote>
+          <cite>&mdash; Erik K.</cite>
+        </div>
+        <div class="rev-card">
+          <div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>&ldquo;Lots of tables, decent cues, plenty of room for darts, large screen for matches.&rdquo;</blockquote>
+          <cite>&mdash; Jason K.</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRIP 1: Pool & Snooker -->
+  <div class="c-strip">
+    <div class="c-inner">
+      <div class="c-visual">
+        <div class="vi">&#127473;</div>
+        <div class="vl">Pool &amp; Snooker</div>
+      </div>
+      <div class="c-text">
+        <div class="eyebrow">Tafelsport</div>
+        <h2>Professionele tafels voor elk niveau</h2>
+        <p>Of je nu voor het eerst een cue vasthoudt of al jarenlang speelt &mdash; bij Hippo vind je jouw plek. We beschikken over meerdere pool- en snookertafels van professionele kwaliteit, altijd in topconditie.</p>
+        <p>Cues, ballen en driehoeken zijn aanwezig. Huur per uur, voor jezelf of met je groep. Beginners zijn net zo welkom als gevorderden.</p>
+        <button class="btn btn-amber" onclick="showPage('act')">Bekijk activiteiten</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRIP 2: Big Sports TV -->
+  <div class="c-strip">
+    <div class="c-inner rev">
+      <div class="c-visual">
+        <div class="vi">&#128250;</div>
+        <div class="vl">Live Sport</div>
+      </div>
+      <div class="c-text">
+        <div class="eyebrow">Entertainment</div>
+        <h2>Live sport op groot scherm</h2>
+        <p>Geen wedstrijd mis je bij Hippo. We zenden alle grote sportevenementen live uit: voetbal, Formule 1, darts, tennis en meer &mdash; op meerdere grote schermen door het hele caf&eacute;.</p>
+        <p>Pak een stoel, bestel een koud biertje van de tap en geniet van de wedstrijd in een echte sportcaf&eacute;sfeer. Met vrienden of gewoon lekker samen.</p>
+        <button class="btn btn-outline" onclick="showPage('con')">Openingstijden bekijken</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRIP 3: Darts & Bar -->
+  <div class="c-strip">
+    <div class="c-inner">
+      <div class="c-visual">
+        <div class="vi">&#127919;</div>
+        <div class="vl">Darts &amp; Bar</div>
+      </div>
+      <div class="c-text">
+        <div class="eyebrow">Meer te doen</div>
+        <h2>Darten, biljarten en een drankje</h2>
+        <p>Naast pool en snooker staan ook stalen en elektrische dartborden klaar. Speel een potje met vrienden of doe mee aan een van onze wekelijkse dartavonden voor een echte competitie-ervaring.</p>
+        <p>Aan de bar vind je een ruim aanbod speciaalbieren van de tap, klassiek biljart en altijd gezellig personeel dat je graag van dienst is.</p>
+        <button class="btn btn-amber" onclick="showPage('res')">Reserveer een plek</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-home -->
+
+<!-- ██████ PAGE: ACTIVITEITEN ██████ -->
+<div id="page-act" class="page">
+  <div class="section">
+    <div class="sec-head">
+      <div class="eyebrow">Wat wij bieden</div>
+      <h2>Onze activiteiten</h2>
+      <div class="gold-line"></div>
+      <p>Van professionele snookertafels tot live dartavonden &mdash; bij Hippo-Pot-Um-Us is er voor iedereen wat te doen. Ontdek het volledige aanbod en plan je bezoek.</p>
+    </div>
+
+    <div class="act-grid">
+      <div class="act-card">
+        <div class="ci">&#127473;</div>
+        <h3>Pool</h3>
+        <p>Onze pooltafels zijn geschikt voor zowel beginners als gevorderden. Huur een tafel per uur en speel 8-ball, 9-ball of gewoon voor de lol. Cues en ballen zijn ter plaatse aanwezig &mdash; jij hoeft alleen maar te komen.</p>
+        <span class="tag">Per uur te huren</span>
+      </div>
+
+      <div class="act-card">
+        <div class="ci">&#129379;</div>
+        <h3>Snooker</h3>
+        <p>Speel op een professionele snookertafel van volwaardig formaat. Ideaal voor wie de uitdaging zoekt van een groter en technischer spel. Alle benodigdheden zijn aanwezig: cues, ballen, de rest &mdash; jij speelt gewoon.</p>
+        <span class="tag">Professioneel formaat</span>
+      </div>
+
+      <div class="act-card">
+        <div class="ci">&#9899;</div>
+        <h3>Biljart</h3>
+        <p>Het klassieke carambolespel in een ontspannen sfeer. Biljart is een prachtig precisiegame voor wie de rustigere, strategische kant van tafelsport waardeert. Beginners geholpen, gevorderden van harte welkom.</p>
+        <span class="tag">Klassiek spel</span>
+      </div>
+
+      <div class="act-card">
+        <div class="ci">&#127919;</div>
+        <h3>Darts</h3>
+        <p>Gooi je pijlen op stalen of elektrische dartborden. Wekelijks organiseren we dartavonden voor competitiespelers en vrienden. Doe mee aan een avond of speel gewoon een casual potje met je gezelschap.</p>
+        <span class="tag">Wekelijkse avonden</span>
+      </div>
+
+      <div class="act-card">
+        <div class="ci">&#128250;</div>
+        <h3>Big Sports TV</h3>
+        <p>Voetbal, Formule 1, tennis, darts &mdash; we uitzenden het allemaal live op grote schermen verspreid door het caf&eacute;. De perfecte plek om een wedstrijd te volgen met vrienden, met een koud biertje in de hand.</p>
+        <span class="tag">Live uitzendingen</span>
+      </div>
+
+      <div class="act-card">
+        <div class="ci">&#127866;</div>
+        <h3>Bar &amp; Caf&eacute;</h3>
+        <p>Onze gezellige bar serveert een breed assortiment speciaalbieren van de tap, frisdranken en heerlijke hapjes. Kom ook gewoon voor een drankje en de sfeer van een echt Hilversums sportcaf&eacute; met vriendelijk personeel.</p>
+        <span class="tag">Speciaalbieren &amp; Hapjes</span>
+      </div>
+    </div>
+
+    <div class="cta-strip">
+      <p class="cq">&ldquo;Een avond vol plezier begint met een goede reservering.&rdquo;</p>
+      <button class="btn btn-dark" onclick="showPage('res')">Reserveer een tafel</button>
+    </div>
+  </div>
+</div><!-- /page-act -->
+
+<!-- ██████ PAGE: RESERVEREN ██████ -->
+<div id="page-res" class="page">
+  <div class="section">
+    <div class="sec-head">
+      <div class="eyebrow">Tafel boeken</div>
+      <h2>Reserveren</h2>
+      <div class="gold-line"></div>
+      <p>Reserveer eenvoudig een tafel via onderstaand formulier. We bevestigen je boeking zo snel mogelijk via telefoon of e-mail.</p>
+    </div>
+
+    <div class="res-grid">
+      <!-- Left -->
+      <div class="res-info">
+        <h2>Openingstijden</h2>
+        <table class="hours-tbl">
+          <tr><td>Maandag t/m donderdag</td><td>14:00 &ndash; 01:00</td></tr>
+          <tr><td>Vrijdag</td><td>14:00 &ndash; 02:00</td></tr>
+          <tr><td>Zaterdag</td><td>12:00 &ndash; 02:00</td></tr>
+          <tr><td>Zondag</td><td>12:00 &ndash; 01:00</td></tr>
+        </table>
+
+        <div class="info-blk">
+          <h3>Reserveringsinfo</h3>
+          <p>Minimale reservering: <strong style="color:var(--cream)">1 uur</strong>. Bij grote groepen (8+) raden we aan van tevoren te bellen voor beschikbaarheid.</p>
+          <p>Gewoon binnenlopen kan ook &mdash; bij beschikbaarheid vind je altijd een tafel.</p>
+        </div>
+
+        <div class="info-blk">
+          <h3>Direct contact</h3>
+          <p>&#128222; <a href="tel:0356236043">035 623 6043</a></p>
+          <p>&#9993;&#65039; <a href="mailto:mail@hippohilversum.nl">mail@hippohilversum.nl</a></p>
+          <p>&#128205; Havenstraat 43, 1211 KG Hilversum</p>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="form-card">
+        <div id="fContent">
+          <h2>Tafel reserveren</h2>
+
+          <div class="fg">
+            <label for="naam">Naam *</label>
+            <input type="text" id="naam" class="fc" placeholder="Voor- en achternaam">
+          </div>
+
+          <div class="frow">
+            <div class="fg">
+              <label for="tel">Telefoon *</label>
+              <input type="tel" id="tel" class="fc" placeholder="06 12345678">
+            </div>
+            <div class="fg">
+              <label for="mail">E-mail</label>
+              <input type="email" id="mail" class="fc" placeholder="jouw@email.nl">
+            </div>
+          </div>
+
+          <div class="frow">
+            <div class="fg">
+              <label for="datum">Datum</label>
+              <input type="date" id="datum" class="fc">
+            </div>
+            <div class="fg">
+              <label for="tijd">Tijd</label>
+              <input type="time" id="tijd" class="fc">
+            </div>
+          </div>
+
+          <div class="frow">
+            <div class="fg">
+              <label for="act">Activiteit</label>
+              <select id="act" class="fc">
+                <option value="">Kies activiteit</option>
+                <option value="pool">Pool</option>
+                <option value="snooker">Snooker</option>
+                <option value="biljart">Biljart</option>
+                <option value="darts">Darts</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="pers">Aantal personen</label>
+              <select id="pers" class="fc">
+                <option value="">Kies aantal</option>
+                <option>1 persoon</option>
+                <option>2 personen</option>
+                <option>3 personen</option>
+                <option>4 personen</option>
+                <option>5 personen</option>
+                <option>6 personen</option>
+                <option>7 personen</option>
+                <option>8 of meer</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="fg">
+            <label for="opm">Opmerking</label>
+            <textarea id="opm" class="fc" placeholder="Bijzonderheden, grote groep, speciale wens..."></textarea>
+          </div>
+
+          <button class="btn btn-amber btn-full" onclick="submitForm()">Reservering aanvragen</button>
+          <p class="fnote">We bevestigen je reservering via telefoon of e-mail.</p>
+        </div>
+
+        <div class="f-success" id="fSuccess">
+          <div class="sico">&#9989;</div>
+          <h3>Aanvraag verzonden!</h3>
+          <p>Bedankt voor je reserveringsaanvraag. We nemen zo snel mogelijk contact met je op via telefoon of e-mail om je boeking te bevestigen.</p>
+          <button class="btn btn-outline" onclick="resetForm()">Nog een reservering</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-res -->
+
+<!-- ██████ PAGE: CONTACT ██████ -->
+<div id="page-con" class="page">
+  <div class="section">
+    <div class="sec-head">
+      <div class="eyebrow">Kom langs</div>
+      <h2>Contact &amp; locatie</h2>
+      <div class="gold-line"></div>
+      <p>Je vindt ons op een steenworp van het centrum van Hilversum. Welkom &mdash; gewoon binnenlopen kan altijd.</p>
+    </div>
+
+    <div class="con-grid">
+      <!-- Left -->
+      <div class="con-info">
+        <h2>Bereikbaarheid</h2>
+
+        <div class="con-item">
+          <div class="con-ico">&#128205;</div>
+          <div>
+            <span class="con-lbl">Adres</span>
+            <span class="con-val">Havenstraat 43, 1211 KG Hilversum</span>
+          </div>
+        </div>
+
+        <div class="con-item">
+          <div class="con-ico">&#128222;</div>
+          <div>
+            <span class="con-lbl">Telefoon</span>
+            <span class="con-val"><a href="tel:0356236043">035 623 6043</a></span>
+          </div>
+        </div>
+
+        <div class="con-item">
+          <div class="con-ico">&#9993;&#65039;</div>
+          <div>
+            <span class="con-lbl">E-mail</span>
+            <span class="con-val"><a href="mailto:mail@hippohilversum.nl">mail@hippohilversum.nl</a></span>
+          </div>
+        </div>
+
+        <div class="con-item">
+          <div class="con-ico">&#128216;</div>
+          <div>
+            <span class="con-lbl">Facebook</span>
+            <span class="con-val"><a href="https://www.facebook.com/pages/Hippo-Pot-Um-Us-Snooker-Pool-en-Sportcaf%C3%A9-Hilversum/131089766950336" target="_blank" rel="noopener">Hippo-Pot-Um-Us op Facebook</a></span>
+          </div>
+        </div>
+
+        <div class="maps-btn">
+          <a href="https://maps.google.com/?q=Havenstraat+43+Hilversum" target="_blank" rel="noopener" class="btn btn-amber">
+            &#128205; Open in Google Maps
+          </a>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="con-right">
+        <h2>Openingstijden</h2>
+        <table class="hours-tbl">
+          <tr><td>Maandag t/m donderdag</td><td>14:00 &ndash; 01:00</td></tr>
+          <tr><td>Vrijdag</td><td>14:00 &ndash; 02:00</td></tr>
+          <tr><td>Zaterdag</td><td>12:00 &ndash; 02:00</td></tr>
+          <tr><td>Zondag</td><td>12:00 &ndash; 01:00</td></tr>
+        </table>
+
+        <div class="amb-cta">
+          <p class="cq">&ldquo;Gewoon binnenlopen kan altijd &mdash; maar reserveren loont!&rdquo;</p>
+          <button class="btn btn-amber" onclick="showPage('res')">Direct reserveren</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-con -->
+
+<!-- ██████ FOOTER ██████ -->
+<footer>
+  <p>&copy; 2026 Hippo-Pot-Um-Us Snooker, Pool &amp; Sportcaf&eacute; Hilversum</p>
+  <p>Havenstraat 43, 1211 KG Hilversum &nbsp;&middot;&nbsp; <a href="tel:0356236043">035 623 6043</a> &nbsp;&middot;&nbsp; <a href="mailto:mail@hippohilversum.nl">mail@hippohilversum.nl</a></p>
+</footer>
+
+<script>
+// === SPA ===
+const pages = ['home','act','res','con'];
+const navMap = {home:'nl-home',act:'nl-act',res:'nl-res',con:'nl-con'};
+const mobMap = {home:'ml-home',act:'ml-act',res:'ml-res',con:'ml-con'};
+
+function showPage(id) {
+  pages.forEach(p => {
+    document.getElementById('page-'+p).classList.remove('active');
+    const nl = document.getElementById(navMap[p]);
+    const ml = document.getElementById(mobMap[p]);
+    if(nl) nl.classList.remove('active');
+    if(ml) ml.classList.remove('active');
+  });
+  document.getElementById('page-'+id).classList.add('active');
+  const nl = document.getElementById(navMap[id]);
+  const ml = document.getElementById(mobMap[id]);
+  if(nl) nl.classList.add('active');
+  if(ml) ml.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// === HAMBURGER ===
+function toggleMenu() {
+  document.getElementById('hbg').classList.toggle('open');
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hbg').classList.remove('open');
+  document.getElementById('mobMenu').classList.remove('open');
+}
+
+// === FORM ===
+function submitForm() {
+  const naam = document.getElementById('naam').value.trim();
+  const tel  = document.getElementById('tel').value.trim();
+  if(!naam) { alert('Vul je naam in om de reservering te verwerken.'); document.getElementById('naam').focus(); return; }
+  if(!tel)  { alert('Vul je telefoonnummer in zodat we contact kunnen opnemen.'); document.getElementById('tel').focus(); return; }
+  document.getElementById('fContent').style.display = 'none';
+  document.getElementById('fSuccess').style.display = 'block';
+}
+
+function resetForm() {
+  ['naam','tel','mail','datum','tijd','act','pers','opm'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  document.getElementById('fContent').style.display = 'block';
+  document.getElementById('fSuccess').style.display = 'none';
+}
+
+// Set min date on date picker
+(function(){
+  const d = document.getElementById('datum');
+  if(d) d.min = new Date().toISOString().split('T')[0];
+})();
+</script>
+</body>
+</html>
